@@ -4,5 +4,14 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "basic-fedora-20-x86_64"
+  config.vm.define "development" do |development|
+    development.vm.box = "basic-fedora-20-x86_64"
+    development.vm.network :private_network, ip: "192.168.111.100"
+  end
+
+  config.vm.define "ansible" do |ansible|
+    ansible.vm.box = "basic-fedora-20-x86_64"
+    ansible.vm.network :private_network, ip: "192.168.111.101"
+    ansible.vm.provision "shell", path: "install_ansible.sh"
+  end
 end

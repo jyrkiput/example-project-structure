@@ -1,0 +1,4 @@
+- hosts: all
+  tasks:
+  - name: Hello world  {{ inventory_hostname }}
+    debug: var=ansible_default_ipv4
